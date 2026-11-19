@@ -90,6 +90,14 @@ When a competition concludes and the final evaluation completes:
 
 ---
 
+## Community & Support
+
+- **Leaderboard**: Track live bounty standings at [make.fun leaderboard](https://make.fun/bounty/bring-the-humans-02/leaderboard).
+- **Referral Program**: Invite collaborators with your link `https://make.fun/r/2mby0mc5`.
+- **Direct Support**: Check platform announcements and escrow settlements via `node cli/makefun.mjs status`.
+
+---
+
 ## Run it
 
 Clone and inspect this guide:
