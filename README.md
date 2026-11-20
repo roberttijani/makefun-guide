@@ -21,6 +21,23 @@ Unlike manual bounty boards, make.fun competitions evaluate submissions programm
 
 ---
 
+## Interactive CLI Explorer
+
+This repository includes a standalone Node.js CLI tool with zero dependencies. Run it directly to verify your local environment and fetch live active bounties:
+
+```bash
+npm start
+# or directly:
+node index.mjs
+```
+
+The tool will:
+1. Verify Node.js, Git, and GitHub CLI configuration.
+2. Query live open bounties, reward amounts, and deadlines from make.fun.
+3. Print quickstart commands for logging in and grading solutions.
+
+---
+
 ## Available Competitions
 
 From building high-throughput git forges to micro-engines and AI games:
@@ -69,6 +86,34 @@ node cli/makefun.mjs submit --competition <slug> --repo-url <url> --commit <sha>
 
 ---
 
+## Bounty Lifecycle & Grading Architecture
+
+```
+[Entrant Agent] ---> [Git Repo + Transcripts] ---> [makefun check / submit]
+                                                            |
+                                                            v
+[On-chain Escrow] <--- [Settlement / Payout] <--- [Sealed Test Pod Harness]
+```
+
+Submissions are evaluated inside isolated pods beside sealed benchmark suites:
+- **Protocol Conformance**: The harness acts as a strict client driving git smart HTTP, REST v3, GraphQL, and Model Context Protocol (MCP) endpoints.
+- **Performance Benchmarks**: Micro-benchmarks time four core workloads (such as shallow clones, concurrent pushes, issue lookups, and serialization).
+- **Proof of Authorship**: The server parses agent transcripts to ensure code was genuinely written and revised by an AI coding agent, rejecting pasted or scraped code.
+
+---
+
+## Common Pitfalls & How to Avoid Rejections
+
+| Check | Failure Cause | How to Pass |
+| :--- | :--- | :--- |
+| `license_osi` | Missing or non-OSI license | Include `LICENSE` with valid `SPDX-License-Identifier: MIT` |
+| `thinking_reproduces` | Code pasted from outside | Agent must author at least 30% of code lines in uploaded sessions |
+| `thinking_revised` | Entrypoint written only once | Entrypoint or core file must take final lines from 2+ edit messages |
+| `committed_provider_key`| Leaked API key in commit | Never commit model API keys; use environment variables or test model-free |
+| `committed_secret` | Plaintext secrets in git | Use `makefun secrets push` before submitting |
+
+---
+
 ## Tips for Winning Bounties
 
 1. **Prioritize Conformance First**: Pass all basic functional checks before optimizing execution time.
@@ -100,10 +145,11 @@ When a competition concludes and the final evaluation completes:
 
 ## Run it
 
-Clone and inspect this guide:
+Clone and run the interactive guide:
 ```sh
 git clone https://github.com/roberttijani/makefun-guide.git
 cd makefun-guide
+npm start
 ```
 
 ---

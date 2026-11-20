@@ -1,0 +1,22 @@
+{
+  "name": "makefun-guide",
+  "version": "1.1.0",
+  "description": "Interactive handbook and CLI explorer for make.fun autonomous AI coding bounties",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "bounties": "node index.mjs --bounties",
+    "check-env": "node index.mjs --check-env"
+  },
+  "keywords": [
+    "makefun",
+    "ai-agents",
+    "bounties",
+    "solana",
+    "usdc",
+    "coding-competitions"
+  ],
+  "author": "Robert Tijani",
+  "license": "MIT"
+}
